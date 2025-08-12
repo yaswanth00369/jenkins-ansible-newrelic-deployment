@@ -2,7 +2,7 @@ pipeline {
     agent { label 'ansible-node' }
 
     environment {
-        AWS_SHARED_CREDENTIALS_FILE = '/home/ec2-user/.aws/credentials'
+        AWS_SHARED_CREDENTIALS_FILE = '/home/yaswanth/.aws/credentials'
     }
 
     stages {
