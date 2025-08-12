@@ -1,10 +1,11 @@
 ---
-- name: Launch EC2 instance using Ansible
+- name: Launch EC2 instance with New Relic Integration
   hosts: localhost
   connection: local
   gather_facts: no
 
   vars:
+    # EC2 Configuration
     default_instance_prefix: "EC2-NewRelic"
     region: ap-south-1
     ami_id: ami-0a1235697f4afa8a4            # Amazon Linux 2023 AMI (ap-south-1)
@@ -13,18 +14,28 @@
     subnet_id: subnet-0b9b0f798dbe19be2      # Replace with your subnet ID
     security_group: sg-0703680985f56f283     # Replace with your security group ID
 
+    # New Relic Variables (pass API key and account  ID)
+    NEW_RELIC_API_KEY: "NRAK-04XUDJPPZ4BV0CVSJXEUV4ZTWWX" # API Key type as User 
+    NEW_RELIC_ACCOUNT_ID: "6978270"  # Account ID
 
   tasks:
     - name: 🧮 Generate random suffix (only once)
       set_fact:
         generated_suffix: "{{ 99999 | random }}"
 
-    - name: 🏷️ Set final bucket name (use CLI input if provided)
+    - name: 🏷️ Set final EC2 instance name
       set_fact:
         instance_name_final: "{{ instance_name | default(default_instance_prefix ~ '-' ~ generated_suffix) }}"
 
+    - name: 📜 Create EC2 user_data script with New Relic install
+      set_fact:
+        ec2_user_data: |
+          #!/bin/bash
+          sudo yum update -y
+          sudo curl -Ls https://download.newrelic.com/install/newrelic-cli/scripts/install.sh | bash
+          sudo NEW_RELIC_API_KEY={{ NEW_RELIC_API_KEY }} NEW_RELIC_ACCOUNT_ID={{ NEW_RELIC_ACCOUNT_ID }} /usr/local/bin/newrelic install -y
 
-    - name: Launch EC2 instance
+    - name: 🚀 Launch EC2 instance with New Relic user_data
       amazon.aws.ec2_instance:
         name: "{{ instance_name_final }}"
         key_name: "{{ key_name }}"
@@ -37,12 +48,13 @@
         security_group: "{{ security_group }}"
         tags:
           Name: "{{ instance_name_final }}"
+        user_data: "{{ ec2_user_data }}"
       register: ec2_result
 
-    - name: Show instance details
+    - name: 📋 Show instance details
       debug:
         msg:
-          - "✅ EC2 instance launched successfully:"
+          - "✅ EC2 Deployed Successfully with NewRelic Integration:"
           - "  - Instance Name: {{ instance_name_final }}"
           - "  - Instance ID: {{ ec2_result.instance_ids[0] }}"
           - "  - Public IP: {{ ec2_result.instances[0].public_ip_address }}"
