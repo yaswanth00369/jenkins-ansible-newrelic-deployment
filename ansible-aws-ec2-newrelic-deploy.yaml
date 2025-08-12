@@ -5,7 +5,7 @@
   gather_facts: no
 
   vars:
-    default_instance_prefix: "yaswanth-demo-instance"
+    default_instance_prefix: "EC2-NewRelic"
     region: ap-south-1
     ami_id: ami-0a1235697f4afa8a4            # Amazon Linux 2023 AMI (ap-south-1)
     instance_type: t2.nano                   # 1vCPU 0.5 GiB Memory
