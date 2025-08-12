@@ -17,6 +17,7 @@
     # New Relic Variables (pass API key and account  ID)
     NEW_RELIC_API_KEY: "NRAK-04XUDJPPZ4BV0CVSJXEUV4ZTWWX" # API Key type as User 
     NEW_RELIC_ACCOUNT_ID: "6978270"  # Account ID
+    NEW_RELIC_DISPLAY_NAME: "AmazonLinux-$(date +%Y%m%d)" # Display name in the NewRelic Account
 
   tasks:
     - name: 🧮 Generate random suffix (only once)
@@ -33,7 +34,7 @@
           #!/bin/bash
           sudo yum update -y
           sudo curl -Ls https://download.newrelic.com/install/newrelic-cli/scripts/install.sh | bash
-          sudo NEW_RELIC_API_KEY={{ NEW_RELIC_API_KEY }} NEW_RELIC_ACCOUNT_ID={{ NEW_RELIC_ACCOUNT_ID }} /usr/local/bin/newrelic install -y
+          sudo NEW_RELIC_API_KEY={{ NEW_RELIC_API_KEY }} NEW_RELIC_ACCOUNT_ID={{ NEW_RELIC_ACCOUNT_ID }} NEW_RELIC_DISPLAY_NAME={{ NEW_RELIC_DISPLAY_NAME }} /usr/local/bin/newrelic install -y
 
     - name: 🚀 Launch EC2 instance with New Relic user_data
       amazon.aws.ec2_instance:
