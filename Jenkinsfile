@@ -7,7 +7,7 @@ pipeline {
 
     stages {
 
-        stage('Run Ansible Playbook') {
+        stage('Deploy EC2 - NewRelic Integration') {
             steps {
                 sh '''
                 ansible-playbook ansible-aws-ec2-newrelic-deploy.yaml
