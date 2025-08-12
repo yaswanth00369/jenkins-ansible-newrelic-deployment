@@ -8,7 +8,7 @@ RUN yum install -y sudo tar gzip shadow-utils findutils which util-linux hostnam
 # Install New Relic
 RUN curl -Ls https://download.newrelic.com/install/newrelic-cli/scripts/install.sh | bash
 RUN sudo NEW_RELIC_API_KEY=NRAK-04XUDJPPZ4BV0CVSJXEUV4ZTWWX NEW_RELIC_ACCOUNT_ID=6978270 /usr/local/bin/newrelic install -y
-RUN echo "display_name: AmazonLinux2-$(date +%Y%m%d)" >> /etc/newrelic-infra.yml
+RUN echo "display_name: AL-Nginx-APP-$(date +%Y%m%d)" >> /etc/newrelic-infra.yml
 
 # Configure Nginx index page
 RUN echo '<!DOCTYPE html> \
