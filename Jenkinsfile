@@ -10,8 +10,8 @@ pipeline {
         stage('Run Ansible Playbook') {
             steps {
                 sh '''
-                ansible-playbook ansible-aws-ec2-deploy.yaml
-                # ansible-playbook ansible-aws-ec2-deploy.yaml --extra-vars "instance_name=yaswanth-demo-instance-${BUILD_NUMBER}"
+                ansible-playbook ansible-aws-ec2-newrelic-deploy.yaml
+                # ansible-playbook ansible-aws-ec2-deploy.yaml --extra-vars "instance_name=EC2-NewRelic-${BUILD_NUMBER}"
                 '''
             }
         }
