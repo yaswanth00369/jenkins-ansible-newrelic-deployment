@@ -1,7 +1,7 @@
 FROM public.ecr.aws/amazonlinux/amazonlinux:2023
 
 # Install dependencies
-RUN yum install -y sudo tar gzip shadow-utils findutils which util-linux hostname htop curl && \
+RUN yum install -y sudo tar gzip shadow-utils findutils which util-linux hostname htop && \
     yum install -y nginx && \
     yum clean all
 
