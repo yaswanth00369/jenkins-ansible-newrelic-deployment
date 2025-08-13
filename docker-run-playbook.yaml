@@ -15,7 +15,6 @@
       community.docker.docker_container:
         name: "{{ docker_container_name }}"
         image: "{{ docker_image_name }}:{{ docker_image_tag }}"
-        pull: yes           # Pull latest image from local
         recreate: yes       # Recreate container if image tag changed
         state: started
         ports: "{{ docker_ports }}"
