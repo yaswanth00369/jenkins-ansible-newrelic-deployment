@@ -1,0 +1,23 @@
+---
+- name: Build Docker image from Dockerfile
+  hosts: localhost
+  become: yes
+
+  vars:
+    docker_image_name: al-nginx-newrelic-image
+    docker_image_tag: latest
+    dockerfile_path: "${WORKSPACE}"
+    
+  tasks:
+    - name: Build Docker image
+      community.docker.docker_image:
+        name: "{{ docker_image_name }}"
+        tag: "{{ docker_image_tag }}"
+        source: build
+        build:
+          path: "{{ dockerfile_path }}"
+      register: build_output
+
+    - name: ✅ Print Build Output Summary
+      debug:
+        var: build_output
