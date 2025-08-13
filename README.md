@@ -43,13 +43,12 @@ Both deployment pipelines include **New Relic integration**, enabling real-time 
 - Jenkins installed and configured  
 - Ansible installed  
 - Docker installed (for container deployment)  
-- New Relic API Key , Licence Key & Account ID  
+- New Relic API Key & Account ID  
 
 ### 🔑 Environment Variables & Secrets
 
 - `NEW_RELIC_API_KEY`  
-- `NEW_RELIC_ACCOUNT_ID`  
-- `NEW_RELIC_LICENSE_KEY`  
+- `NEW_RELIC_ACCOUNT_ID` 
 
 ### 📊 Monitoring
 After deployment, you can view:  
