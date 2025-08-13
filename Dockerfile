@@ -1,28 +1,34 @@
 FROM public.ecr.aws/amazonlinux/amazonlinux:2023
 
-# Install dependencies (including tools required by New Relic script)
-RUN yum install -y sudo tar gzip shadow-utils findutils which util-linux hostname htop && \
+# Install dependencies
+RUN yum install -y sudo tar gzip shadow-utils findutils which util-linux hostname htop curl && \
     yum install -y nginx && \
     yum clean all
 
-# Install New Relic
-RUN curl -Ls https://download.newrelic.com/install/newrelic-cli/scripts/install.sh | bash
-RUN sudo NEW_RELIC_API_KEY=NRAK-04XUDJPPZ4BV0CVSJXEUV4ZTWWX NEW_RELIC_ACCOUNT_ID=6978270 /usr/local/bin/newrelic install -y
-RUN echo "display_name: AL-Nginx-APP-$(date +%Y%m%d)" >> /etc/newrelic-infra.yml
+# Install New Relic Infrastructure Agent directly (bypass CLI detection issues)
+RUN curl -o /etc/yum.repos.d/newrelic-infra.repo https://download.newrelic.com/infrastructure_agent/linux/yum/el/8/x86_64/newrelic-infra.repo && \
+    yum install -y newrelic-infra && \
+    echo "enable_process_metrics: true" > /etc/newrelic-infra.yml && \
+    echo "status_server_enabled: true" >> /etc/newrelic-infra.yml && \
+    echo "status_server_port: 18003" >> /etc/newrelic-infra.yml && \
+    echo "license_key: df41d8c2212297082ca4fefb4397eaf4FFFFNRAL" >> /etc/newrelic-infra.yml && \
+    echo "custom_attributes:" >> /etc/newrelic-infra.yml && \
+    echo "  nr_deployed_by: ansible-docker-build" >> /etc/newrelic-infra.yml && \
+    echo "display_name: Yaswanth-Nginx-App" >> /etc/newrelic-infra.yml
 
 # Configure Nginx index page
 RUN echo '<!DOCTYPE html> \
 <html> \
 <head> \
-<title>NewRelic Integration</title> \
+<title>Nginx - NewRelic</title> \
 </head> \
 <body> \
-<h1>This Docker Image is integrated successfully with New Relic</h1> \
+<h1>This Docker Image/Container was successfully integrated with New Relic</h1> \
 </body> \
 </html>' > /usr/share/nginx/html/index.html
 
 # Expose Nginx port
 EXPOSE 80
 
-# Start both New Relic Agent and Nginx
+# Start New Relic Agent & Nginx
 CMD ["/bin/sh", "-c", "newrelic-infra & nginx -g 'daemon off;'"]
