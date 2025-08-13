@@ -3,16 +3,6 @@ pipeline {
 
     stages {
 
-        stage('Cleanup Docker Containers and Images') {
-            steps {
-                script {
-                    echo '🧹 Cleaning up all local Docker containers and images...'
-                    sh 'docker rm -f $(docker ps -qa) || true'
-                    sh 'docker rmi -f $(docker images -qa) || true'
-                }
-            }
-        }
-
         stage('Build Docker Image - NewRelic Integration') {
             steps {
                 dir("${WORKSPACE}") {
