@@ -16,16 +16,20 @@ RUN curl -o /etc/yum.repos.d/newrelic-infra.repo https://download.newrelic.com/i
     echo "  nr_deployed_by: ansible-docker-build" >> /etc/newrelic-infra.yml && \
     echo "display_name: Yaswanth-Nginx-App" >> /etc/newrelic-infra.yml
 
-# Configure Nginx index page
+# Configure Nginx index page with styled message
 RUN echo '<!DOCTYPE html> \
 <html> \
 <head> \
-<title>Nginx - NewRelic</title> \
+<title>Docker-Nginx-NewRelic</title> \
 </head> \
 <body> \
-<h1>This Docker Image/Container was successfully integrated with New Relic</h1> \
+<h1><p><span style="color:crimson;">This Nginx application was</span> \
+<span style="color:green;">deployed</span> \
+<span style="color:purple;">using a Dockerfile</span> \
+<span style="color:Teal;">with built-in New Relic integration.</span></p></h1> \
 </body> \
 </html>' > /usr/share/nginx/html/index.html
+
 
 # Expose Nginx port
 EXPOSE 80
