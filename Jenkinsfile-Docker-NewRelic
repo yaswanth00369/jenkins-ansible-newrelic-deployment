@@ -1,0 +1,22 @@
+pipeline {
+    agent { label 'ansible-node' }
+
+    stages {
+
+        stage('Bulid Docker Image - NewRelic Integration') {
+            steps {
+                sh '''
+                ansible-playbook docker-build-playbook.yaml
+                '''
+            }
+        }
+          
+        stage('Run Docker Conatiner') {
+            steps {
+                sh '''
+                ansible-playbook docker-run-playbook.yaml
+                '''
+            }
+        }
+    }
+}
