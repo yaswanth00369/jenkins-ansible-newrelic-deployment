@@ -1,7 +1,8 @@
 ---
 - name: Build Docker image from Dockerfile
   hosts: localhost
-  become: yes
+  connection: local
+  gather_facts: false
 
   vars:
     docker_image_name: al-nginx-newrelic-image
