@@ -3,20 +3,31 @@ pipeline {
 
     stages {
 
-        stage('Bulid Docker Image - NewRelic Integration') {
+        stage('Cleanup Docker Containers and Images') {
             steps {
-                sh '''
-                ansible-playbook docker-build-playbook.yaml
-                '''
+                script {
+                    echo '🧹 Cleaning up all local Docker containers and images...'
+                    sh 'docker rm -f $(docker ps -qa) || true'
+                    sh 'docker rmi -f $(docker images -qa) || true'
+                }
             }
         }
-          
-        stage('Run Docker Conatiner') {
+
+        stage('Build Docker Image - NewRelic Integration') {
             steps {
-                sh '''
-                ansible-playbook docker-run-playbook.yaml
-                '''
+                dir("${WORKSPACE}") {
+                    sh 'ansible-playbook docker-build-playbook.yaml'
+                }
             }
         }
-    }
-}
+
+        stage('Run Docker Container') {
+            steps {
+                dir("${WORKSPACE}") {
+                    sh 'ansible-playbook docker-run-playbook.yaml'
+                }
+            }
+        }
+
+    } // end of stages
+} // end of pipeline
