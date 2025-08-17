@@ -34,7 +34,7 @@
           sudo yum update -y
           sudo curl -Ls https://download.newrelic.com/install/newrelic-cli/scripts/install.sh | bash
           sudo NEW_RELIC_API_KEY={{ NEW_RELIC_API_KEY }} NEW_RELIC_ACCOUNT_ID={{ NEW_RELIC_ACCOUNT_ID }} /usr/local/bin/newrelic install -y
-          sudo sh -c "echo 'display_name: EC2-AL2023-$(date +%Y%m%d)' >> /etc/newrelic-infra.yml"
+          sudo sh -c "echo 'display_name: Mumbai-EC2-$(date +%Y%m%d)' >> /etc/newrelic-infra.yml"
           sudo systemctl restart newrelic-infra.service
 
     - name: 🚀 Launch EC2 instance with New Relic user_data
