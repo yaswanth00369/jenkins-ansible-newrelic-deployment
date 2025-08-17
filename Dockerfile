@@ -14,7 +14,7 @@ RUN curl -o /etc/yum.repos.d/newrelic-infra.repo https://download.newrelic.com/i
     echo "license_key: df41d8c2212297082ca4fefb4397eaf4FFFFNRAL" >> /etc/newrelic-infra.yml && \
     echo "custom_attributes:" >> /etc/newrelic-infra.yml && \
     echo "  nr_deployed_by: ansible-docker-build" >> /etc/newrelic-infra.yml && \
-    echo "display_name: Yaswanth-Nginx-App" >> /etc/newrelic-infra.yml
+    echo "display_name: Mumbai-Docker-Nginx-App" >> /etc/newrelic-infra.yml
 
 # Configure Nginx index page with styled message
 RUN echo '<!DOCTYPE html> \
