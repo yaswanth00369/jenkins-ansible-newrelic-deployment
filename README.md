@@ -65,3 +65,30 @@ After deployment, you can view:
 - **Application Performance Data** → New Relic APM (if enabled)
  
 ---
+
+## EC2 Integration with NewRelic
+
+<img width="1288" height="435" alt="image" src="https://github.com/user-attachments/assets/1503f37b-f25e-47a7-9a56-5cd4434d7c4b" />
+
+<img width="1292" height="696" alt="image" src="https://github.com/user-attachments/assets/2e30ceea-0d45-41c1-8c1f-232a2b0a9001" />
+
+<img width="1302" height="695" alt="image" src="https://github.com/user-attachments/assets/90950961-c0ad-4339-874b-4362d5a3cc01" />
+
+<img width="1302" height="695" alt="image" src="https://github.com/user-attachments/assets/0c7e20a3-e489-40c2-b020-0ea5c008ae65" />
+
+
+---
+
+## Docker Container with NewRelic
+
+<img width="1302" height="453" alt="image" src="https://github.com/user-attachments/assets/d53b6d3f-5465-4b4e-a237-a681a22e68a1" />
+
+<img width="1302" height="453" alt="image" src="https://github.com/user-attachments/assets/ebde6ab9-18de-4035-a37d-3f2ba0ba0fc1" />
+
+<img width="1302" height="453" alt="image" src="https://github.com/user-attachments/assets/71336079-50e4-44bb-9d37-25b2687992f7" />
+
+<img width="1302" height="174" alt="image" src="https://github.com/user-attachments/assets/003e05e6-054a-4100-89ca-cca91bb82138" />
+
+<img width="1295" height="649" alt="image" src="https://github.com/user-attachments/assets/7a4c4c16-d46f-46cb-9488-76767b32267f" />
+
+---
