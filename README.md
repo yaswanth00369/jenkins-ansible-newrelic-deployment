@@ -4,6 +4,14 @@ Automated **CI/CD pipeline** leveraging **Jenkins** and **Ansible** to deploy ap
 
 ---
 
+## 🧱 Architecture
+
+> ✅ VS Code → GitHub → Jenkins → Ansible → NewRelic Deploy at Infra Setup time
+
+![Architecture Diagram](NewRelic-Jenkins-Ansible-Deployment.drawio.png)
+
+---
+
 ## 📌 Overview
 This project demonstrates a **DevOps workflow** that automates application deployment into two environments:  
 1️⃣ **AWS EC2 Instance**  
