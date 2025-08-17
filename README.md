@@ -48,7 +48,8 @@ Both deployment pipelines include **New Relic integration**, enabling real-time 
 ### 🔑 Environment Variables & Secrets
 
 - `NEW_RELIC_API_KEY`  
-- `NEW_RELIC_ACCOUNT_ID` 
+- `NEW_RELIC_ACCOUNT_ID`
+-  `license_key`
 
 ### 📊 Monitoring
 After deployment, you can view:  
